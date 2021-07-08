@@ -12,12 +12,17 @@ struct ScreenView: View {
     var headups: [Headup] = []
     let headup: Headup
     
+    var typeTrenings: [TypeTrening] = []
+    let typeTrening: TypeTrening
+    
 //    init() {
 //        self.headups = StorageManager.shared.fetchHeadup()
 //    }
     
     @State private var isPresented = false
     @State private var isPresentedInput = false
+    @State private var isPresentedHistory = false
+    @State private var isPresentedShowTreningType = false
     
     @Binding var treningType: String
     @Binding var oneRepeat: String
@@ -36,7 +41,7 @@ struct ScreenView: View {
             }
             .padding()
             .sheet(isPresented: $isPresented) {
-                AddTypeView(showModal: $isPresented)
+                AddTypeView(treningType: $treningType, showModal: $isPresented)
             }
             
             Button(action: { isPresentedInput.toggle() }) {
@@ -47,15 +52,29 @@ struct ScreenView: View {
             .sheet(isPresented: $isPresentedInput) {
                 InputHeadUpView(
                     showModal: $isPresentedInput,
-                    headup: headup,
-                    treningType: $treningType,
-                    oneRepeat: $oneRepeat,
-                    twoRepeat: $twoRepeat,
-                    treeRepeat: $treeRepeat,
-                    fourRepeat: $fourRepeat,
-                    fiveRepeat: $fiveRepeat,
-                    date: $date
+                    headup: headup
                 )
+            }
+            
+            Button(action: { isPresentedHistory.toggle() }) {
+                Text("История тренировок")
+                Spacer()
+            }
+            .padding()
+            .sheet(isPresented: $isPresentedHistory) {
+                HistoryTreningView(
+                    headup: headup,
+                    showModal: $isPresentedHistory
+                )
+            }
+            
+            Button(action: { isPresentedShowTreningType.toggle() }) {
+                Text("Упражнения")
+                Spacer()
+            }
+            .padding()
+            .sheet(isPresented: $isPresentedShowTreningType) {
+                ViewTypeTrening(typeTrening: typeTrening)
             }
             Spacer()
         }
@@ -66,11 +85,13 @@ struct ScreenView: View {
 struct ScreenView_Previews: PreviewProvider {
     
     static let headup = Headup.getHeadupList()[0]
+    static let typeTrening = TypeTrening.getTypeTreningList()[0]
     
     static var previews: some View {
         ScreenView(
             headup: headup,
-            treningType: .constant("Стойка"),
+            typeTrening: typeTrening,
+            treningType: .constant(""),
             oneRepeat: .constant("10"),
             twoRepeat: .constant("20"),
             treeRepeat: .constant("30"),

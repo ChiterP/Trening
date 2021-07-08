@@ -8,18 +8,20 @@
 import SwiftUI
 
 struct InputHeadUpView: View {
+    
+    @State private var treningType = ""
+    @State private var oneRepeat = ""
+    @State private var twoRepeat = ""
+    @State private var treeRepeat = ""
+    @State private var fourRepeat = ""
+    @State private var fiveRepeat = ""
+    @State private var date = ""
+        
+    @State private var typeTrening = ""
     @Binding var showModal: Bool
     
     let headup: Headup
-    
-    @Binding var treningType: String
-    @Binding var oneRepeat: String
-    @Binding var twoRepeat: String
-    @Binding var treeRepeat: String
-    @Binding var fourRepeat: String
-    @Binding var fiveRepeat: String
-    @Binding var date: String
-        
+
     var body: some View {
         VStack {
             HStack {
@@ -82,14 +84,7 @@ struct InputView_Previews: PreviewProvider {
     static var previews: some View {
         InputHeadUpView(
             showModal: .constant(false),
-            headup: headup,
-            treningType: .constant("Стойка"),
-            oneRepeat: .constant("10"),
-            twoRepeat: .constant("20"),
-            treeRepeat: .constant("30"),
-            fourRepeat: .constant("40"),
-            fiveRepeat: .constant("50"),
-            date: .constant("01.06.2021")
+            headup: headup
         )
     }
 }

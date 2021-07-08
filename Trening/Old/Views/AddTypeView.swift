@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddTypeView: View {
     
-    @State private var typeTrening = ""
+    @Binding var treningType: String
     @Binding var showModal: Bool
     
     var body: some View {
@@ -19,14 +19,25 @@ struct AddTypeView: View {
                 Text("Введи название упражнения")
                     .padding()
                 Spacer()
+               
                 Button("Done") {
                     showModal.toggle()
+                    StorageManager.shared.saveHeadup(
+                        headup: Headup.init(
+                            treningType: treningType,
+                            oneRepeat: "",
+                            twoRepeat: "",
+                            treeRepeat: "",
+                            fourRepeat: "",
+                            fiveRepeat: "",
+                            date: ""))
                 }
                 .padding()
             }
-            TextField("Стойка на руках", text: $typeTrening)
+            TextField("Стойка на руках", text: $treningType)
                 .padding()
                 .frame(alignment: .center)
+            
             
             Button("Exit") {
                 showModal.toggle()
@@ -41,6 +52,8 @@ struct AddTypeView: View {
 
 struct AddTypeView_Previews: PreviewProvider {
     static var previews: some View {
-        AddTypeView(showModal: .constant(false))
+        AddTypeView(treningType: .constant(""),
+                    showModal: .constant(false)
+        )
     }
 }

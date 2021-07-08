@@ -5,6 +5,31 @@
 //  Created by 18316409 on 21.06.2021.
 //
 
+
+struct TypeTrening: Codable, Hashable  {
+    let nameTrening: String
+    
+    static func getTypeTreningList() -> [TypeTrening] {
+        
+        var nameTrenings: [TypeTrening] = []
+        let iterationCount = nameTrenings.count
+        let treningTypes = DataManager.shared.treningType
+        
+        
+        for index in 0..<iterationCount {
+            let nameTrening = TypeTrening(
+                nameTrening: treningTypes[index]
+            )
+
+            nameTrenings.append(nameTrening)
+        }
+        return nameTrenings
+    }
+    
+}
+
+//MARK --------- Удалить !!!!
+
 struct Headup: Codable, Hashable {
     
     let treningType: String
@@ -15,8 +40,6 @@ struct Headup: Codable, Hashable {
     let fiveRepeat: String
     let date: String
 }
-
-
 
 
 extension Headup {
@@ -34,7 +57,7 @@ extension Headup {
         let dates = DataManager.shared.date
 //        let iterationCount = min(names.count, surnames.count, emails.count, phones.count)
         let iterationCount = min(treningTypes.count, oneRepeats.count, twoRepeats.count, treeRepeats.count, fourRepeats.count, fiveRepeats.count, dates.count )
-
+        
         for index in 0..<iterationCount {
             let headup = Headup(
                 treningType: treningTypes[index],
