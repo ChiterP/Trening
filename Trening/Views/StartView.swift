@@ -11,6 +11,8 @@ struct StartView: View {
     
     @State private var isPresentedInput = false
     @State private var isPresentedShow = false
+    @State private var isPresentedProcess = false
+    
     @State private var isUpdateView = false
     
     let typeTrenings = StorageManager.shared.fetchNameTrening()
@@ -50,6 +52,21 @@ struct StartView: View {
                     showModal: $isPresentedShow)
 
             }
+            
+            Button(action: { isPresentedProcess.toggle() }) {
+                HStack {
+                    Text("Записать тренировку")
+                        .frame(alignment: .leading)
+                    Spacer()
+                }
+            }
+            .padding()
+            .sheet(isPresented: $isPresentedProcess) {
+                InTreningProcess(
+                    showModal: $isPresentedProcess)
+
+            }
+            
             
             Spacer()
         }

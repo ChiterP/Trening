@@ -32,6 +32,7 @@ struct ShowTypeTrening: View {
                         }
                         
                     }
+                    
                     .onDelete(perform: { indexSet in
                         indexSet.forEach {
                             typeTrenings.remove(at: $0)
