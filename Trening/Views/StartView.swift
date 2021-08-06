@@ -12,10 +12,13 @@ struct StartView: View {
     @State private var isPresentedInput = false
     @State private var isPresentedShow = false
     @State private var isPresentedProcess = false
+    @State private var isPresentedHistory = false
+    
     
     @State private var isUpdateView = false
     
     let typeTrenings = StorageManager.shared.fetchNameTrening()
+    let inputTrenings = StorageManager.shared.fetchInputTrening()
     
     @Binding var treningType: String
     
@@ -39,9 +42,9 @@ struct StartView: View {
                                   UpdateView: $isUpdateView)
             }
             
-            Button(action: { isPresentedShow.toggle() }) {
+            Button(action: {isPresentedShow.toggle() }) {
                 HStack {
-                    Text("Мои упражнения")
+                    Text("Мои тренировки")
                         .frame(alignment: .leading)
                     Spacer()
                 }
@@ -62,15 +65,27 @@ struct StartView: View {
             }
             .padding()
             .sheet(isPresented: $isPresentedProcess) {
-                InTreningProcess(
+                ChooseTrenig(
                     showModal: $isPresentedProcess)
 
+            }
+            
+            Button(action: { isPresentedHistory.toggle() }) {
+                HStack {
+                    Text("История тренировок")
+                        .frame(alignment: .leading)
+                    Spacer()
+                }
+            }
+            .padding()
+            .sheet(isPresented: $isPresentedHistory) {
+                ViewTreningHistory(
+                    showModal: $isPresentedHistory)
             }
             
             
             Spacer()
         }
-        
     }
 }
 

@@ -11,8 +11,8 @@ import SwiftUI
 struct InTreningTypeView: View {
     @Binding var showModal: Bool
     @Binding var UpdateView: Bool
+  
     @State private var treningType = ""
-    
     
     var body: some View {
         
@@ -24,7 +24,6 @@ struct InTreningTypeView: View {
             TextField("Стойка на руках", text: $treningType)
                 .padding()
                 .frame(alignment: .center)
-            
             
             HStack {
                 Button("Exit") {
@@ -43,13 +42,11 @@ struct InTreningTypeView: View {
             .padding()
             Spacer()
         }
-        
     }
 }
 
 struct InTreningTypeView_Previews: PreviewProvider {
     static var previews: some View {
-        
         InTreningTypeView(
             showModal: .constant(false),
             UpdateView: .constant(false))

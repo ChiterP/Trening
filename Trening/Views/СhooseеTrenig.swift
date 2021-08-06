@@ -1,17 +1,18 @@
 //
-//  ShowTypeTrening.swift
+//  СhooseеTrenig.swift
 //  Trening
 //
-//  Created by 18316409 on 06.07.2021.
+//  Created by 18316409 on 13.07.2021.
 //
 
 import SwiftUI
 
-struct ShowTypeTrening: View {
+struct ChooseTrenig: View {
+    
     @Binding var showModal: Bool
     
-    @State var typeTrenings: [TypeTrening] = StorageManager.shared.fetchNameTrening()
-//    @State var inputTrenings: [InputTrening] = StorageManager.shared.fetchInputTrening()
+    @State var typeTrenings : [TypeTrening] = StorageManager.shared.fetchNameTrening()
+    @State var inputTrenings : [InputTrening] = StorageManager.shared.fetchInputTrening()
     
     var body: some View {
         
@@ -27,11 +28,14 @@ struct ShowTypeTrening: View {
                 
                 List {
                     ForEach(typeTrenings, id: \.self) { trening in
-                        NavigationLink(destination: Details(typeTrening: trening))
+                        NavigationLink(destination: InTreningProcess(
+                            showModal: $showModal,
+                            nameTrening: trening.nameTrening
+                        )
+                        )
                         {
                             TreningRow(typeTrening: trening)
                         }
-                        
                     }
                     
                     .onDelete(perform: { indexSet in
@@ -42,18 +46,20 @@ struct ShowTypeTrening: View {
                     }
                     )
                 }
-                .navigationBarTitle("Мои тренировки")
+                .navigationBarTitle("Тренируем сейчас")
             }
         }
     }
 }
 
-struct ShowTypeTrening_Previews: PreviewProvider {
-    
-    static let typeTrenings = TypeTrening.getTypeTreningList()
-    
+struct ChooseTrenig_Previews: PreviewProvider {
     static var previews: some View {
-        ShowTypeTrening(
-            showModal: .constant(false))
+        ChooseTrenig(
+            showModal: .constant(false)
+        )
     }
 }
+
+
+
+

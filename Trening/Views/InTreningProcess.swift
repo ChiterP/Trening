@@ -9,19 +9,25 @@ import SwiftUI
 
 struct InTreningProcess: View {
     @Binding var showModal: Bool
+   
     @State var repeatOne = ""
-
+    @State var repeatTwo = ""
+    @State var repeatTree = ""
+    @State var repeatFour = ""
+    @State var repeatFive = ""
+    @State var temp = ""
+//    @State var date: Date
+    
+    let nameTrening: String
+//    let inputTrening = InputTrening
     let date = Date()
+    
     
     
     var body: some View {
         VStack {
             HStack {
-                Text("Выбери тренировку: ")
-                    .padding()
-                
-                
-                Text("Тут будет списочек")
+                Text("Тренировка: \(nameTrening) ")
                     .padding()
                 Spacer()
             }
@@ -42,33 +48,33 @@ struct InTreningProcess: View {
                     TextField("60", text: $repeatOne)
                         .border(Color.gray, width: 1)
                         .frame(width: 40)
-                    TextField("60", text: $repeatOne)
+                    TextField("60", text: $repeatTwo)
                         .border(Color.gray, width: 1)
                         .frame(width: 40)
-                    TextField("60", text: $repeatOne)
+                    TextField("60", text: $repeatTree)
                         .border(Color.gray, width: 1)
                         .frame(width: 40)
-                    TextField("60", text: $repeatOne)
+                    TextField("60", text: $repeatFour)
                         .border(Color.gray, width: 1)
                         .frame(width: 40)
-                    TextField("60", text: $repeatOne)
+                    TextField("60", text: $repeatFive)
                         .border(Color.gray, width: 1)
                         .frame(width: 40)
                 }
                 VStack {
-                    TextField("60", text: $repeatOne)
+                    TextField("60", text: $temp)
                         .border(Color.gray, width: 1)
                         .frame(width: 40)
-                    TextField("60", text: $repeatOne)
+                    TextField("60", text: $temp)
                         .border(Color.gray, width: 1)
                         .frame(width: 40)
-                    TextField("60", text: $repeatOne)
+                    TextField("60", text: $temp)
                         .border(Color.gray, width: 1)
                         .frame(width: 40)
-                    TextField("60", text: $repeatOne)
+                    TextField("60", text: $temp)
                         .border(Color.gray, width: 1)
                         .frame(width: 40)
-                    TextField("60", text: $repeatOne)
+                    TextField("60", text: $temp)
                         .border(Color.gray, width: 1)
                         .frame(width: 40)
                 }
@@ -81,28 +87,39 @@ struct InTreningProcess: View {
             Spacer()
             }
             .padding()
-            Button(action: {
-                localDate()
+            
+            
+            Button("Save") {
                 showModal.toggle()
-            }) {
-                Text("Save")
+//                if !treningType.isEmpty {
+                StorageManager.shared.saveinputTrening(
+                    inputTrening: InputTrening.init(
+                        treningType: Trening.TypeTrening.init(nameTrening: nameTrening),
+                        oneRepeat: repeatOne,
+                        twoRepeat: repeatTwo,
+                        treeRepeat: repeatTree,
+                        fourRepeat: repeatFour,
+                        fiveRepeat: repeatFive,
+                        date: date
+                )
+                )
+//                StorageManager.shared.saveNameTrening(
+//                    nameTrening: TypeTrening.init(nameTrening: treningType)
+//                )}
+//                UpdateView.toggle()
+                
             }
             Spacer()
         }
     }
-    
-    func localDate() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "ru_RU")
-        print(dateFormatter.string(from: date))
-    }
-    
-    
 }
+
 
 struct InTreningProcess_Previews: PreviewProvider {
     static var previews: some View {
         InTreningProcess(
-            showModal: .constant(false))
+            showModal: .constant(false),
+            nameTrening: "Текст"
+        )
     }
 }

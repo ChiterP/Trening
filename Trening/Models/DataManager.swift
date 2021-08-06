@@ -13,34 +13,17 @@ class DataManager {
     static let shared = DataManager()
     
     var treningType = [
-        "Стойка на руках", "Присед", "Гипер экстензия", "Подтягивания",
+        "Стойка на руках", "Присед",
+        "Гипер экстензия", "Подтягивания",
         "Вис", "Бицепс бедра"
     ]
-    
-    let oneRepeat = [
-        "10", "20", "30", "40", "50"
-    ]
-    
-    let twoRepeat = [
-        "10", "20", "30", "40", "50"
-    ]
-    
-    let treeRepeat = [
-        "10", "20", "30", "40", "50"
-    ]
-    
-    let fourRepeat = [
-        "10", "20", "30", "40", "50"
-    ]
-    
-    let fiveRepeat = [
-        "10", "20", "30", "40", "50"
-    ]
 
-    let date = [
-        "01.06.2021", "02.06.2021", "03.06.2021", "04.06.2021", "05.06.2021"
-    ]
-
+    let oneRepeat = "10"
+    let twoRepeat = "20"
+    let treeRepeat = "30"
+    let fourRepeat = "40"
+    let fiveRepeat = "50"
+    let date = "01.06.2021"
     private init() {}
 }
 
